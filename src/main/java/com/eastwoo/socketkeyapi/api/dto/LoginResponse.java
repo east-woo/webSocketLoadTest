@@ -1,5 +1,6 @@
 package com.eastwoo.socketkeyapi.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
@@ -15,6 +16,8 @@ import lombok.Data;
  */
 @Data
 public class LoginResponse {
+
+    @JsonProperty("api-key")
     private String apiKey;
 
     public LoginResponse(String apiKey) {
