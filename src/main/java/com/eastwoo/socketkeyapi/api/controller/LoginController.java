@@ -4,6 +4,7 @@ import com.eastwoo.socketkeyapi.api.dto.LoginRequest;
 import com.eastwoo.socketkeyapi.api.dto.LoginResponse;
 import com.eastwoo.socketkeyapi.api.model.User;
 import com.eastwoo.socketkeyapi.api.repository.UserRepository;
+import com.eastwoo.socketkeyapi.api.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,32 +29,14 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class LoginController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    @Value("${keepAlive.default.timeout}")
-    private int defaultKeepAliveTimeout;
-
-    public LoginController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public LoginController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest) {
-        User user = userRepository.findByUsernameAndPassword(loginRequest.getId(), loginRequest.getPw());
-
-        if (user != null) {
-
-            String apiKey = Base64.getEncoder().encodeToString(UUID.randomUUID().toString().getBytes());
-
-
-            int keepAliveTimeOut = loginRequest.getKeepAliveTimeOut() > 0
-                    ? loginRequest.getKeepAliveTimeOut()
-                    : defaultKeepAliveTimeout;
-
-
-            return new LoginResponse(apiKey);
-        } else {
-            throw new RuntimeException("Invalid credentials");
-        }
+        return userService.login(loginRequest);
     }
 }
