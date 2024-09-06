@@ -1,4 +1,4 @@
-package com.eastwoo.socketkeyapi.api.dto;
+package com.eastwoo.socketkeyapi.api.user.dto;
 
 import lombok.Data;
 
