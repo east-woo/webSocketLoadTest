@@ -25,12 +25,14 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final ApiKeyService apiKeyService;
 
     @Value("${keepAlive.default.timeout}")
     private int defaultKeepAliveTimeout;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, ApiKeyService apiKeyService) {
         this.userRepository = userRepository;
+        this.apiKeyService = apiKeyService;
     }
 
     public LoginResponse login(LoginRequest loginRequest) {
@@ -39,9 +41,12 @@ public class UserService {
         if (user != null) {
             String apiKey = Base64.getEncoder().encodeToString(UUID.randomUUID().toString().getBytes());
 
+
             int keepAliveTimeOut = loginRequest.getKeepAliveTimeOut() > 0
                     ? loginRequest.getKeepAliveTimeOut()
                     : defaultKeepAliveTimeout;
+            apiKeyService.generateApiKey(apiKey,loginRequest.getId());
+            apiKeyService.storeApiKey(apiKey,loginRequest.getId(),keepAliveTimeOut);
 
             return new LoginResponse(apiKey);
         } else {

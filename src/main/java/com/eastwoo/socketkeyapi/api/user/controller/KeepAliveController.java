@@ -1,5 +1,9 @@
 package com.eastwoo.socketkeyapi.api.user.controller;
 
+import com.eastwoo.socketkeyapi.api.user.service.ApiKeyService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,11 +30,12 @@ public class KeepAliveController {
 
     @PutMapping
     public ResponseEntity<?> keepAlive(@RequestHeader("api-key") String apiKey) {
-        if (apiKeyService.validateApiKey(apiKey)) {
-            apiKeyService.extendApiKeyExpiration(apiKey, 900); // Extend by 15 minutes
-            return ResponseEntity.ok(Map.of("msg", "ok"));
+        boolean updated = apiKeyService.extendApiKeyExpiry(apiKey);
+
+        if (updated) {
+            return ResponseEntity.ok().body("{\"msg\":\"ok\"}");
         } else {
-            return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).body(Map.of("msg", "check your api-key"));
+            return ResponseEntity.status(452).body("{\"msg\":\"check your api-key\"}");
         }
     }
 }
