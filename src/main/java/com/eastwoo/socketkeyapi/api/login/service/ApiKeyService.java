@@ -1,14 +1,12 @@
-package com.eastwoo.socketkeyapi.api.user.service;
+package com.eastwoo.socketkeyapi.api.login.service;
 
-import com.eastwoo.socketkeyapi.api.user.dto.ApiKeyData;
+import com.eastwoo.socketkeyapi.api.login.dto.ApiKeyData;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * packageName    : com.eastwoo.socketkeyapi.api.user.service

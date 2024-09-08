@@ -1,8 +1,8 @@
-package com.eastwoo.socketkeyapi.api.user.controller;
+package com.eastwoo.socketkeyapi.api.login.controller;
 
-import com.eastwoo.socketkeyapi.api.user.dto.LoginRequest;
-import com.eastwoo.socketkeyapi.api.user.dto.LoginResponse;
-import com.eastwoo.socketkeyapi.api.user.service.UserService;
+import com.eastwoo.socketkeyapi.api.login.dto.LoginRequest;
+import com.eastwoo.socketkeyapi.api.login.dto.LoginResponse;
+import com.eastwoo.socketkeyapi.api.login.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

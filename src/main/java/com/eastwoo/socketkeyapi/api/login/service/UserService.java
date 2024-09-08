@@ -1,9 +1,9 @@
-package com.eastwoo.socketkeyapi.api.user.service;
+package com.eastwoo.socketkeyapi.api.login.service;
 
-import com.eastwoo.socketkeyapi.api.user.dto.LoginRequest;
-import com.eastwoo.socketkeyapi.api.user.dto.LoginResponse;
-import com.eastwoo.socketkeyapi.api.user.model.User;
-import com.eastwoo.socketkeyapi.api.user.repository.UserRepository;
+import com.eastwoo.socketkeyapi.api.login.dto.LoginRequest;
+import com.eastwoo.socketkeyapi.api.login.dto.LoginResponse;
+import com.eastwoo.socketkeyapi.api.login.model.User;
+import com.eastwoo.socketkeyapi.api.login.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 

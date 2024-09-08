@@ -1,4 +1,4 @@
-package com.eastwoo.socketkeyapi.api.user.dto;
+package com.eastwoo.socketkeyapi.api.login.dto;
 
 /**
  * packageName    : com.eastwoo.socketkeyapi.api.user.dto

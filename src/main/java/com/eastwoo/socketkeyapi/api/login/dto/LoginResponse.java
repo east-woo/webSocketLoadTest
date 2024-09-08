@@ -1,4 +1,4 @@
-package com.eastwoo.socketkeyapi.api.user.dto;
+package com.eastwoo.socketkeyapi.api.login.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
