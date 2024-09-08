@@ -74,18 +74,15 @@ public class ApiKeyService {
      * API 키의 유효 기간을 연장
      *
      * @param apiKey API 키
-     * @param timeout 연장할 유효 기간(초)
      */
-    private void extendApiKeyExpiration(String apiKey, int timeout) {
-        if (redisTemplate.hasKey(apiKey)) {
-            ApiKeyData apiKeyData = (ApiKeyData) redisTemplate.opsForValue().get(apiKey);
-            if (apiKeyData != null) {
-                apiKeyData = ApiKeyData.builder()
-                        .userId(apiKeyData.getUserId())
-                        .expiresAt(LocalDateTime.now().plusSeconds(timeout))
-                        .build();
-                redisTemplate.opsForValue().set(apiKey, apiKeyData, Duration.ofSeconds(timeout));
-            }
+    public void extendApiKeyExpiration(String apiKey) {
+        ApiKeyData apiKeyData = (ApiKeyData) redisTemplate.opsForValue().get(apiKey);
+        if (apiKeyData != null) {
+            apiKeyData = ApiKeyData.builder()
+                    .userId(apiKeyData.getUserId())
+                    .expiresAt(LocalDateTime.now().plusSeconds(defaultKeepAliveTimeout))
+                    .build();
+            redisTemplate.opsForValue().set(apiKey, apiKeyData, Duration.ofSeconds(defaultKeepAliveTimeout));
         }
     }
 
@@ -97,10 +94,5 @@ public class ApiKeyService {
      */
     public ApiKeyData getApiKeyInfo(String apiKey) {
         return (ApiKeyData) redisTemplate.opsForValue().get(apiKey);
-    }
-
-    public boolean extendApiKeyExpiry(String apiKey) {
-        this.extendApiKeyExpiration(apiKey, defaultKeepAliveTimeout);
-
     }
 }
