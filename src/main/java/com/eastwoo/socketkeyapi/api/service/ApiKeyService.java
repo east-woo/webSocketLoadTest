@@ -93,4 +93,8 @@ public class ApiKeyService {
     public ApiKeyData getApiKeyInfo(String apiKey) {
         return (ApiKeyData) redisTemplate.opsForValue().get(apiKey);
     }
+
+    public boolean hasApiKey(String apiKey) {
+        return redisTemplate.hasKey(apiKey);
+    }
 }

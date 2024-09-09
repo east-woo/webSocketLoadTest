@@ -20,15 +20,17 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketConfig implements WebSocketConfigurer {
 
     private final WebSocketHandler webSocketHandler;
+    private final ApiKeyHandshakeInterceptor apiKeyHandshakeInterceptor;
 
-    public WebSocketConfig(WebSocketHandler webSocketHandler) {
+    public WebSocketConfig(WebSocketHandler webSocketHandler, ApiKeyHandshakeInterceptor apiKeyHandshakeInterceptor) {
         this.webSocketHandler = webSocketHandler;
+        this.apiKeyHandshakeInterceptor = apiKeyHandshakeInterceptor;
     }
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(webSocketHandler, "/ws")
-                .addInterceptors(new ApiKeyHandshakeInterceptor())
+                .addInterceptors(apiKeyHandshakeInterceptor)
                 .setAllowedOrigins("*"); // Customize allowed origins for security
     }
 }
