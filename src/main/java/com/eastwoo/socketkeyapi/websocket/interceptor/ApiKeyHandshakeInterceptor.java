@@ -33,29 +33,35 @@ public class ApiKeyHandshakeInterceptor extends HttpSessionHandshakeInterceptor 
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-        // ServerHttpRequest를 ServletServerHttpRequest로 캐스팅하여 HttpServletRequest를 얻습니다.
-        if (request instanceof ServletServerHttpRequest) {
-            ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
-            HttpServletRequest httpRequest = servletRequest.getServletRequest();
-
-            // 요청에서 API 키를 쿼리 파라미터로 가져옵니다.
-            String apiKey = httpRequest.getParameter("api-key");
-
-            // API 키를 검증합니다.
-            if (apiKeyService.hasApiKey(apiKey)) {
-                return true;
-            } else {
-                response.setStatusCode(HttpStatus.FORBIDDEN);
-                return false;
-            }
+        HttpServletRequest httpRequest = getHttpServletRequest(request);
+        if (httpRequest == null) {
+            response.setStatusCode(HttpStatus.FORBIDDEN);
+            return false;
         }
 
-        response.setStatusCode(HttpStatus.FORBIDDEN);
-        return false;
+        String apiKey = httpRequest.getParameter("api-key");
+
+        // API 키를 검증합니다.
+        if (apiKeyService.hasApiKey(apiKey)) {
+            return true;
+        } else {
+            response.setStatusCode(HttpStatus.FORBIDDEN);
+            return false;
+        }
     }
 
     @Override
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception exception) {
+        // 핸드셰이크 이후 작업 처리 가능
+    }
 
+    // HttpServletRequest를 추출하는 메서드를 별도로 만들어 다형성을 활용
+    private HttpServletRequest getHttpServletRequest(ServerHttpRequest request) {
+        // 다양한 ServerHttpRequest 구현체에 맞는 로직을 추가 가능
+        if (request instanceof ServletServerHttpRequest) {
+            return ((ServletServerHttpRequest) request).getServletRequest();
+        }
+        // 추후 확장이 필요할 경우 추가 구현체에 맞는 처리 추가 가능
+        return null;
     }
 }
