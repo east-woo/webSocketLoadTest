@@ -1,6 +1,6 @@
-package com.eastwoo.socketkeyapi.api.login.repository;
+package com.eastwoo.socketkeyapi.api.repository;
 
-import com.eastwoo.socketkeyapi.api.login.model.User;
+import com.eastwoo.socketkeyapi.api.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

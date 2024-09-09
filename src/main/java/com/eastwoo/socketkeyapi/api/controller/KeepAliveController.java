@@ -1,8 +1,8 @@
-package com.eastwoo.socketkeyapi.api.login.controller;
+package com.eastwoo.socketkeyapi.api.controller;
 
-import com.eastwoo.socketkeyapi.api.login.dto.ApiResponse;
-import com.eastwoo.socketkeyapi.api.login.model.ApiResponseStatus;
-import com.eastwoo.socketkeyapi.api.login.service.ApiKeyService;
+import com.eastwoo.socketkeyapi.api.dto.ApiResponse;
+import com.eastwoo.socketkeyapi.api.model.ApiResponseStatus;
+import com.eastwoo.socketkeyapi.api.service.ApiKeyService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;

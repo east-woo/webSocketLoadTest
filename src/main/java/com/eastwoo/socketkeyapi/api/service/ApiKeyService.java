@@ -1,6 +1,6 @@
-package com.eastwoo.socketkeyapi.api.login.service;
+package com.eastwoo.socketkeyapi.api.service;
 
-import com.eastwoo.socketkeyapi.api.login.dto.ApiKeyData;
+import com.eastwoo.socketkeyapi.api.dto.ApiKeyData;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

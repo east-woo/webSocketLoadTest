@@ -1,4 +1,4 @@
-package com.eastwoo.socketkeyapi.api.login.model;
+package com.eastwoo.socketkeyapi.api.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

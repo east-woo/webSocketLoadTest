@@ -1,4 +1,6 @@
-package com.eastwoo.socketkeyapi.api.login.model;
+package com.eastwoo.socketkeyapi.api.model;
+
+import lombok.ToString;
 
 /**
  * packageName    : com.eastwoo.socketkeyapi.api.user.model

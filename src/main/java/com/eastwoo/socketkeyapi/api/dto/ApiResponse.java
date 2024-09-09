@@ -1,4 +1,6 @@
-package com.eastwoo.socketkeyapi.api.login.dto;
+package com.eastwoo.socketkeyapi.api.dto;
+
+import lombok.Getter;
 
 /**
  * packageName    : com.eastwoo.socketkeyapi.api.user.dto
@@ -11,6 +13,7 @@ package com.eastwoo.socketkeyapi.api.login.dto;
  * -----------------------------------------------------------
  * 2024-09-08        dongwoo       최초 생성
  */
+@Getter
 public class ApiResponse {
     private String message;
 
