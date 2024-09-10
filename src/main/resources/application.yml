@@ -24,3 +24,6 @@ spring:
 keepAlive:
   default:
     timeout: 900
+
+fileReader:
+  jsonDirectory: D:\\SVN\\2022-KAIA-동적주제도\\3차-2024년\\21.연구수행\\200.테스트베드\\CCTV_수집데이터\\2024_09_04\\640\\original

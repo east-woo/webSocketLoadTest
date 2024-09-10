@@ -3,7 +3,10 @@ package com.eastwoo.socketkeyapi.websocket.interceptor;
 import com.eastwoo.socketkeyapi.api.service.ApiKeyService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
+import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
@@ -38,16 +42,18 @@ public class ApiKeyHandshakeInterceptor extends HttpSessionHandshakeInterceptor 
             response.setStatusCode(HttpStatus.FORBIDDEN);
             return false;
         }
+        return true;
+/*        String apiKey = httpRequest.getParameter("api-key");
 
-        String apiKey = httpRequest.getParameter("api-key");
-
-        // API 키를 검증합니다.
+        // API 키를 검증
         if (apiKeyService.hasApiKey(apiKey)) {
             return true;
         } else {
-            response.setStatusCode(HttpStatus.FORBIDDEN);
+            response.setStatusCode(HttpStatus.NOT_IMPLEMENTED);
             return false;
-        }
+        }*/
+
+
     }
 
     @Override
@@ -64,4 +70,5 @@ public class ApiKeyHandshakeInterceptor extends HttpSessionHandshakeInterceptor 
         // 추후 확장이 필요할 경우 추가 구현체에 맞는 처리 추가 가능
         return null;
     }
+
 }
