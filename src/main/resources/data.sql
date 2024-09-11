@@ -1,2 +1,2 @@
 INSERT INTO users (ID,USERNAME, PASSWORD)
-VALUES (1,'intellivix','pass0001!');
+VALUES (1,'dongwoo','pass0001!');
