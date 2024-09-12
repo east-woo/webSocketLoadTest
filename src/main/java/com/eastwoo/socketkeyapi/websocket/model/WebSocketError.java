@@ -2,6 +2,9 @@ package com.eastwoo.socketkeyapi.websocket.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import org.springframework.web.ErrorResponse;
 
 /**
  * Please explain the class!!
@@ -10,32 +13,29 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @fileName : WebSocketError
  * @since : 2024-09-10
  */
+@Getter
+@AllArgsConstructor
 public enum WebSocketError {
     INVALID_API_KEY(501, "Invalid API-KEY");
 
     private final int errorCode;
     private final String message;
-
-    WebSocketError(int errorCode, String message) {
-        this.errorCode = errorCode;
-        this.message = message;
-    }
-
-    public int getErrorCode() {
-        return errorCode;
-    }
-
-    public String getMessage() {
-        return message;
-    }
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     public String toJson() {
-        ObjectMapper objectMapper = new ObjectMapper();
+        ErrorResponse errorResponse = new ErrorResponse(errorCode, message);
         try {
-            return objectMapper.writeValueAsString(this);
+            return OBJECT_MAPPER.writeValueAsString(errorResponse);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return "{}"; // JSON 변환 오류 시 빈 JSON 객체 반환
+            return "{}";
         }
+    }
+
+    @Getter
+    @AllArgsConstructor
+    private static class ErrorResponse {
+        private final int ErrorCode;
+        private final String msg;
     }
 }
