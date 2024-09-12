@@ -1,5 +1,8 @@
 package com.eastwoo.socketkeyapi.websocket.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * Please explain the class!!
  *
@@ -27,6 +30,12 @@ public enum WebSocketError {
     }
 
     public String toJson() {
-        return String.format("{\"ErrorCode\": %d, \"msg\": \"%s\"}", errorCode, message);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "{}"; // JSON 변환 오류 시 빈 JSON 객체 반환
+        }
     }
 }
