@@ -42,6 +42,7 @@ public class ApiKeyHandshakeInterceptor extends HttpSessionHandshakeInterceptor 
             response.setStatusCode(HttpStatus.FORBIDDEN);
             return false;
         }
+        attributes.put("api-key", httpRequest.getParameter("api-key"));
         return true;
 /*        String apiKey = httpRequest.getParameter("api-key");
 

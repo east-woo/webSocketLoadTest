@@ -37,17 +37,16 @@ public class WebSocketHandler extends TextWebSocketHandler {
         String apiKey = (String) session.getAttributes().get("api-key");
 
         if (apiKey == null || !apiKeyService.hasApiKey(apiKey)) {
-            // Send error message
             session.sendMessage(new TextMessage(WebSocketError.INVALID_API_KEY.toJson()));
             session.close(CloseStatus.NORMAL.withReason(WebSocketError.INVALID_API_KEY.getMessage()));
             return;
         }
-        sessions.add(session); // Add session to active clients
+        sessions.add(session);
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        sessions.remove(session); // Remove session when client disconnects
+        sessions.remove(session);
     }
 
     public void broadcastMessage(String message) throws IOException {
