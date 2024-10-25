@@ -35,7 +35,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         String apiKey = (String) session.getAttributes().get("api-key");
-
+        log.info("apiKey :" + apiKey);
         if (apiKey == null || !apiKeyService.hasApiKey(apiKey)) {
             session.sendMessage(new TextMessage(WebSocketError.INVALID_API_KEY.toJson()));
             session.close(CloseStatus.NORMAL.withReason(WebSocketError.INVALID_API_KEY.getMessage()));

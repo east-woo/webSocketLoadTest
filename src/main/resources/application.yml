@@ -26,4 +26,4 @@ keepAlive:
     timeout: 900
 
 fileReader:
-  jsonDirectory: D:\\sandbox\\DTM_2024_09_11\\0911_203\\original
+  jsonDirectory: D:\\SVN\\2022-KAIA-동적주제도\\3차-2024년\\21.연구수행\\200.테스트베드\\CCTV_수집데이터\\2024_10_21\\205번\\1018버전\\2024_10_21_11~2024_10_21_14\\original

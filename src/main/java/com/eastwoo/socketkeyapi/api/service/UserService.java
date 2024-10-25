@@ -4,6 +4,7 @@ import com.eastwoo.socketkeyapi.api.dto.LoginRequest;
 import com.eastwoo.socketkeyapi.api.dto.LoginResponse;
 import com.eastwoo.socketkeyapi.api.model.User;
 import com.eastwoo.socketkeyapi.api.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -21,6 +22,7 @@ import java.util.UUID;
  * -----------------------------------------------------------
  * 2024-09-06        dongwoo       최초 생성
  */
+@Slf4j
 @Service
 public class UserService {
 
@@ -36,8 +38,10 @@ public class UserService {
     }
 
     public LoginResponse login(LoginRequest loginRequest) {
-        User user = userRepository.findByUsernameAndPassword(loginRequest.getId(), loginRequest.getPw());
 
+        User user = userRepository.findByUsernameAndPassword(loginRequest.getId(), loginRequest.getPw());
+        log.info(loginRequest.toString());
+        log.info(user.toString());
         if (user != null) {
             String apiKey = Base64.getEncoder().encodeToString(UUID.randomUUID().toString().getBytes());
 

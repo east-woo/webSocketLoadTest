@@ -27,7 +27,7 @@ public class DeviceController {
     public String getVaChannels(@RequestHeader(value = "api-key") String apiKey) {
         log.info("Get device vaChannels: {}", apiKey);
         try {
-            Resource resource = new ClassPathResource("metadata/video_mata_203.json");
+            Resource resource = new ClassPathResource("metadata/video_mata_205.json");
             Path path = Paths.get(resource.getURI());
             log.info("path: {}", path);
             return new String(Files.readAllBytes(path));
